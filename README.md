@@ -83,7 +83,7 @@ Also this example uses `react-native-vector-icons` for the button Icons.
 | active         | boolean       | false               | action buttons visible or not
 | autoInactive   | boolean       | true                | Auto hide ActionButtons when ActionButton.Item is pressed.
 | position       | string        |  "center"  | one of: `left` `center` and `right`
-| radiua | number | 100 | radius of menu
+| radius | number | 100 | radius of menu
 | bgColor   | string        | "transparent"       | color of overlay when ActionButtons are visible
 | buttonColor    | string        | "rgba(0,0,0,1)"     | background color of the +Button **(must be rgba value!)**
 | btnOutRange    | string        | props.buttonColor   | button background color to animate to
@@ -100,3 +100,4 @@ Also this example uses `react-native-vector-icons` for the button Icons.
 | ------------- |:-------------:|:------------:       | ----------- |
 | onPress       | func          | null                | **required** function, triggers when a button is tapped
 | buttonColor   | string        | same as + button    | background color of the Button
+| size          | number        | 36                  | width and height of the item
