@@ -44,7 +44,7 @@ export default class ActionButtonItem extends Component {
             ]
           }]}
       >
-        <Text style={{position: "absolute", right: 60, top: 15, color: "white", fontWeight: "bold"}}>Test</Text>
+        <Text style={{position: "absolute", right: 60, top: 15, color: "white", fontWeight: "bold"}}>{this.props.title}</Text>
         <TouchableOpacity style={{flex:1}} activeOpacity={this.props.activeOpacity || 0.85} onPress={this.props.onPress}>
           <View
             style={[styles.actionButton,{
