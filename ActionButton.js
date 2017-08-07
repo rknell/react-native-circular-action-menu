@@ -13,26 +13,10 @@ import {
 import ActionButtonItem from './ActionButtonItem';
 
 const alignMap = {
-  center: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    startDegree: 180,
-    endDegree: 360,
-  },
-
-  left: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-end',
-    startDegree: 270,
-    endDegree: 360,
-  },
-
-  right: {
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
     startDegree: 180,
     endDegree: 270,
-  },
 };
 
 export default class ActionButton extends Component {
@@ -56,7 +40,7 @@ export default class ActionButton extends Component {
   }
 
   getActionContainerStyle() {
-    const {alignItems, justifyContent} = alignMap[this.props.position];
+    const {alignItems, justifyContent} = alignMap;
     return [styles.overlay, styles.actionContainer, {
       alignItems,
       justifyContent,
@@ -168,16 +152,7 @@ export default class ActionButton extends Component {
 
   renderActions() {
     if (!this.state.active) return null;
-    const startDegree = this.props.startDegree || alignMap[this.props.position].startDegree;
-    const endDegree = this.props.endDegree || alignMap[this.props.position].endDegree;
-    const startRadian = startDegree * Math.PI / 180;
-    const endRadian = endDegree * Math.PI / 180;
-
     const childrenCount = React.Children.count(this.props.children);
-    let offset = 0;
-    if (childrenCount !== 1) {
-      offset = (endRadian - startRadian) / (childrenCount - 1);
-    }
 
     return (
       React.Children.map(this.props.children, (button, index) => {
@@ -189,11 +164,10 @@ export default class ActionButton extends Component {
           >
             <ActionButtonItem
               key={index}
-              position={this.props.position}
+              itemNumber={index}
               anim={this.state.anim}
               size={this.props.itemSize}
-              radius={this.props.radius}
-              angle={startRadian + index * offset}
+              title={this.props.title}
               btnColor={this.props.btnOutRange}
               {...button.props}
               onPress={() => {
