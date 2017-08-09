@@ -17,35 +17,24 @@ export default class ActionButtonItem extends Component {
       <Animated.View
         style={[{
             opacity: this.props.anim,
-            width: this.props.size,
-            height: this.props.size,
             flexDirection: "row",
             transform: [
               {
                 translateY: this.props.anim.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [0, (this.props.itemNumber * -60) + -110],
+                  outputRange: [0, (this.props.itemNumber * -60) + -90],
                 }) },
               {
                 translateX: this.props.anim.interpolate({
                   inputRange: [0, 1],
                   outputRange: [0, 0],
                 }) },
-              {
-                rotate: this.props.anim.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: ['0deg', '720deg'],
-                }) },
-              {
-                scale: this.props.anim.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, 1],
-                }) },
+
             ]
           }]}
       >
-        <Text style={{position: "absolute", right: 60, top: 15, color: "white", fontWeight: "bold"}}>{this.props.title}</Text>
-        <TouchableOpacity style={{flex:1}} activeOpacity={this.props.activeOpacity || 0.85} onPress={this.props.onPress}>
+        <View style={{flex: 1, alignItems: "flex-end"}}><Text style={{position: "absolute", right: 60, top: 15, color: "white", fontWeight: "bold"}}>{this.props.title}</Text>
+        <TouchableOpacity style={{width: this.props.size, height: this.props.size}} activeOpacity={this.props.activeOpacity || 0.85} onPress={this.props.onPress}>
           <View
             style={[styles.actionButton,{
                 width: this.props.size,
@@ -56,7 +45,9 @@ export default class ActionButtonItem extends Component {
           >
             {this.props.children}
           </View>
+
         </TouchableOpacity>
+        </View>
       </Animated.View>
     );
   }

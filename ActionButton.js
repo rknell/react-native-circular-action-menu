@@ -114,7 +114,7 @@ export default class ActionButton extends Component {
                     {
                       scale: this.state.anim.interpolate({
                         inputRange: [0, 1],
-                        outputRange: [1, this.props.outRangeScale]
+                        outputRange: [1, 1]
                       }),
                     },
                     {
