@@ -1,6 +1,5 @@
 import React, {
-  Component,
-  PropTypes,
+  Component
 } from 'react';
 import {
   StyleSheet,
@@ -228,27 +227,6 @@ export default class ActionButton extends Component {
 }
 
 ActionButton.Item = ActionButtonItem;
-
-ActionButton.propTypes = {
-  active: PropTypes.bool,
-  bgColor: PropTypes.string,
-  buttonColor: PropTypes.string,
-  buttonTextColor: PropTypes.string,
-  size: PropTypes.number,
-  itemSize: PropTypes.number,
-  autoInactive: PropTypes.bool,
-  onPress: PropTypes.func,
-  onOverlayPress: PropTypes.func,
-  backdrop: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.object,
-  ]),
-  startDegree: PropTypes.number,
-  endDegree: PropTypes.number,
-  radius: PropTypes.number,
-  children: PropTypes.node,
-  position: PropTypes.oneOf(['left', 'center', 'right']),
-};
 
 ActionButton.defaultProps = {
   active: false,
