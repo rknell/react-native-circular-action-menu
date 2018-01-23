@@ -12,10 +12,10 @@ import {
 import ActionButtonItem from './ActionButtonItem';
 
 const alignMap = {
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    startDegree: 180,
-    endDegree: 270,
+  alignItems: 'flex-end',
+  justifyContent: 'flex-end',
+  startDegree: 180,
+  endDegree: 270,
 };
 
 export default class ActionButton extends Component {
@@ -91,11 +91,11 @@ export default class ActionButton extends Component {
           activeOpacity={0.85}
           onLongPress={this.props.onLongPress}
           onPress={() => {
-              this.props.onPress();
-              if (this.props.children) {
-                this.animateButton();
-              }
-            }}
+            this.props.onPress();
+            if (this.props.children) {
+              this.animateButton();
+            }
+          }}
         >
           <Animated.View
             style={
@@ -138,15 +138,24 @@ export default class ActionButton extends Component {
     return (
       <Animated.Text
         style={[styles.btnText,
-                {
-                  color: this.state.anim.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [this.props.buttonTextColor, this.props.btnOutRangeTxt]
-                  })
-                }]}>
+          {
+            color: this.state.anim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [this.props.buttonTextColor, this.props.btnOutRangeTxt]
+            })
+          }]}>
         +
       </Animated.Text>
     );
+  }
+
+  _getItemNumber(itemIndex){
+    return this.props.children.reduce((result, item, index)=>{
+      if(index <= itemIndex && item){
+        result++
+      }
+      return result
+    }, -1)
   }
 
   renderActions() {
@@ -155,21 +164,22 @@ export default class ActionButton extends Component {
 
     return (
       React.Children.map(this.props.children, (button, index) => {
-        return (
+        if(button){
+          return (
 
-          <View
-            pointerEvents="box-none"
-            style={this.getActionContainerStyle()}
-          >
-            <ActionButtonItem
-              key={index}
-              itemNumber={index}
-              anim={this.state.anim}
-              size={this.props.itemSize}
-              title={this.props.title}
-              btnColor={this.props.btnOutRange}
-              {...button.props}
-              onPress={() => {
+            <View
+              pointerEvents="box-none"
+              style={this.getActionContainerStyle()}
+            >
+              <ActionButtonItem
+                key={index}
+                itemNumber={this._getItemNumber(index)}
+                anim={this.state.anim}
+                size={this.props.itemSize}
+                title={this.props.title}
+                btnColor={this.props.btnOutRange}
+                {...button.props}
+                onPress={() => {
                   if (this.props.autoInactive) {
                     this.timeout = setTimeout(() => {
                       this.reset();
@@ -177,9 +187,12 @@ export default class ActionButton extends Component {
                   }
                   button.props.onPress();
                 }}
-            />
-          </View>
-        );
+              />
+            </View>
+          );
+        } else {
+          return null
+        }
       })
     );
   }
@@ -200,7 +213,7 @@ export default class ActionButton extends Component {
                 opacity: this.state.anim,
                 flex: 1,
               }
-                  }
+            }
           >
             {this.props.backdrop}
           </Animated.View>
